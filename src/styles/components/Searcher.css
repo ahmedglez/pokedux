@@ -46,8 +46,8 @@
 	border: none;
 	box-shadow: none !important;
 	border: none !important;
-	background-color: transparent !important;
-	color: violet !important;
+	background-color: white !important;
+	color: blueviolet !important;
 }
 
 .ant-input-search-button:hover {
