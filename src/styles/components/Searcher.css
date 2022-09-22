@@ -44,12 +44,13 @@
 
 .ant-input-search-button {
 	border: none;
-	box-shadow: none;
-	background-color: blueviolet;
-	color: white;
+	box-shadow: none !important;
+	border: none !important;
+	background-color: transparent !important;
+	color: violet !important;
 }
 
 .ant-input-search-button:hover {
-	filter: brightness(90%);
+	filter: brightness(60%);
 	background-color: blueviolet;
 }
