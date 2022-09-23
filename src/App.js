@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import Searcher from './components/Searcher';
 import PokemonList from './components/PokemonList';
 
-import { getPokemonsWithDetails } from './actions/actions';
+import { getPokemons } from './api';
+import { setPokemons } from './actions/actions';
 import { useSelector, useDispatch } from 'react-redux';
 
 import logo from './assets/svg/logo.svg';
@@ -14,9 +15,12 @@ function App() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		getPokemonsWithDetails(pokemons)(dispatch);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		const fetchPokemons = async () => {
+			const data = await getPokemons();
+			dispatch(setPokemons(data));
+		};
+		fetchPokemons();
+	}, [dispatch]);
 
 	return (
 		<div className='App'>
