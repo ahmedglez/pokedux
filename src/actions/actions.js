@@ -1,6 +1,13 @@
-import { SET_POKEMONS } from './types';
+import { SET_POKEMONS, SET_FAVORITE } from './types';
 
-export const setPokemons = (payload) => ({
+const setPokemons = (payload) => ({
 	type: SET_POKEMONS,
 	payload,
 });
+
+const setFavorite = (payload) => ({
+	type: SET_FAVORITE,
+	payload,
+});
+
+export { setPokemons, setFavorite };

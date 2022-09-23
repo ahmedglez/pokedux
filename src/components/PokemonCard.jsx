@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Card } from 'antd';
+import { useDispatch } from 'react-redux';
+import { setFavorite } from '../actions/actions';
+import { Card, Button } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import '../styles/components/PokemonCard.css';
-import { StarOutlined } from '@ant-design/icons';
+import { StarOutlined, StarFilled } from '@ant-design/icons';
 import axios from 'axios';
 import { Spin } from 'antd';
 
@@ -10,6 +12,9 @@ const PokemonCard = ({ pokemon }) => {
 	const { name, url } = pokemon;
 	const [pokemonData, setPokemonData] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [isFavorite, setIsFavorite] = useState(false);
+	const dispatch = useDispatch();
+
 	useEffect(() => {
 		const fetchPokemonData = async () => {
 			const response = await axios.get(url);
@@ -20,10 +25,8 @@ const PokemonCard = ({ pokemon }) => {
 	}, [url]);
 
 	const handleFav = () => {
-		const element = document.getElementById(`pokemon-star${pokemonData.id}`)
-			.firstChild.firstChild;
-		element.classList.toggle('pokemon-card__star--active');
-		element.classList.toggle('active');
+		setIsFavorite(!isFavorite);
+		dispatch(setFavorite(pokemonData));
 	};
 
 	return (
@@ -39,16 +42,20 @@ const PokemonCard = ({ pokemon }) => {
 				)
 			}
 			actions={[
-				<StarOutlined
+				<Button
+					className='fav-button'
+					icon={
+						isFavorite ? <StarFilled /> : <StarOutlined className='filled' />
+					}
 					id={pokemonData ? `pokemon-star${pokemonData.id}` : null}
-					key='star'
-					onClick={() => handleFav()}
-				/>,
+					onClick={() => handleFav()}></Button>,
 			]}>
 			<Meta
 				description={
 					loading ? (
-						<Spin />
+						<div className='loader-container'>
+							<Spin className='spin' spinning size='large' />
+						</div>
 					) : (
 						<div>
 							<p>Specie: {pokemonData.species.name}</p>

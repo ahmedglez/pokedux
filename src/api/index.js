@@ -6,6 +6,16 @@ const getPokemons = async () => {
 		.then((response) => {
 			return response.data.results;
 		})
+		.then((data) => {
+			return data.map((pokemon, index) => {
+				return {
+					id: index + 1,
+					name: pokemon.name,					
+					url: pokemon.url,
+					favorite: false,
+				};
+			});
+		})
 		.catch((error) => {
 			console.log(error);
 		});
