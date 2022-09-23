@@ -4,21 +4,32 @@
 	align-items: center;
 	justify-content: center;
 	height: fit-content;
-    min-width: 280px;
+	min-width: 280px;
 	min-height: 324px;
+	max-height: 450px;
 	border: 1px solid black;
 	border-radius: 10px;
 	margin: 10px;
 	padding: 10px;
 	background-color: #f5f5f5;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-	cursor: pointer;
+	cursor: pointer !important;
 	transition: all 0.3s ease;
 	position: relative;
 	box-shadow: 0 0 10px rgba(164, 163, 163, 0.5);
 }
 .pokemon-card:hover {
 	transform: scale(1.1);
+}
+
+.ant-card-cover {
+	width: 100%;
+	margin: 0 auto;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
 }
 
 .ant-card-extra {
@@ -71,4 +82,48 @@
 
 .active {
 	color: rgb(196, 196, 75) !important;
+}
+
+.ant-spin {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	position: relative;
+}
+
+.ant-spin span {
+	width: 60px;
+	height: 60px;
+	color: #000;
+	z-index: 1;
+	margin-top: 80px;
+}
+
+.ant-spin span > i {
+	width: 25px !important;
+	height: 25px !important;
+	background-color: blueviolet !important;
+}
+
+.loader-container {
+	width: 100px;
+	height: 100%;
+	background-color: red;
+}
+
+.fav-button {
+	border-radius: 50% !important;
+	border: none !important;
+	outline: none !important;
+	color: yellow !important;
+}
+
+.fav-button svg {
+	color: rgb(203, 203, 47) !important;
+	fill: rgb(236, 236, 57);
+}
+
+.fav-button:hover {
+	border: none;
+	outline: none;
 }
