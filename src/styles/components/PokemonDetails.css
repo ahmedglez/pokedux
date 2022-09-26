@@ -1,0 +1,44 @@
+
+
+.pokemon-details .ant-card {
+	width: 100% !important;
+    height: 50px !important;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+	background-color: #fff;
+	border: 1px solid #e8e8e8;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.ant-card:hover {
+	scale: initial;
+}
+
+.pokemon-details .carousel {
+	width: 100%;
+	height: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.pokemon-details .carousel .ant-carousel {
+	width: 100%;
+	height: 50%;
+}
+
+
+
+
+.pokemon-details .carousel .ant-carousel img{
+    height: 60px;
+}
+

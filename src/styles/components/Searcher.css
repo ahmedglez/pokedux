@@ -51,6 +51,6 @@
 }
 
 .ant-input-search-button:hover {
-	filter: brightness(60%);
 	background-color: blueviolet;
+
 }

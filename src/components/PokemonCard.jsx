@@ -1,44 +1,37 @@
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setFavorite } from '../actions/actions';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFavorite, setPokemon, setModal } from '../actions/actions';
 import { Card, Button } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import '../styles/components/PokemonCard.css';
 import { StarOutlined, StarFilled } from '@ant-design/icons';
-import axios from 'axios';
 import { Spin } from 'antd';
 
 const PokemonCard = ({ pokemon }) => {
-	const { name, url } = pokemon;
-	const [pokemonData, setPokemonData] = useState(null);
-	const [loading, setLoading] = useState(true);
 	const [isFavorite, setIsFavorite] = useState(false);
+	const {loading} = useSelector((state) => state);
 	const dispatch = useDispatch();
-
-	useEffect(() => {
-		const fetchPokemonData = async () => {
-			const response = await axios.get(url);
-			setPokemonData(response.data);
-			setLoading(false);
-		};
-		fetchPokemonData();
-	}, [url]);
 
 	const handleFav = () => {
 		setIsFavorite(!isFavorite);
-		dispatch(setFavorite(pokemonData));
+		dispatch(setFavorite(pokemon));
+	};
+
+	const handleClick = () => {
+		dispatch(setPokemon(pokemon));
+		dispatch(setModal(true));
 	};
 
 	return (
 		<Card
-			loading={loading}
+			onClick={() => handleClick()}
 			className='pokemon-card'
-			title={name[0].toUpperCase() + name.slice(1)}
+			title={pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}
 			cover={
 				loading ? (
 					<Spin />
 				) : (
-					<img alt={name} src={pokemonData.sprites.front_default} />
+					<img alt={pokemon.name} src={pokemon.sprites.front_default} />
 				)
 			}
 			actions={[
@@ -47,7 +40,7 @@ const PokemonCard = ({ pokemon }) => {
 					icon={
 						isFavorite ? <StarFilled /> : <StarOutlined className='filled' />
 					}
-					id={pokemonData ? `pokemon-star${pokemonData.id}` : null}
+					id={pokemon ? `pokemon-star${pokemon.id}` : null}
 					onClick={() => handleFav()}></Button>,
 			]}>
 			<Meta
@@ -58,15 +51,38 @@ const PokemonCard = ({ pokemon }) => {
 						</div>
 					) : (
 						<div>
-							<p>Specie: {pokemonData.species.name}</p>
 							<p>
 								{' '}
-								Type:{' '}
-								{pokemonData.types.map((type, index) => {
-									if (index === pokemonData.types.length - 1) {
-										return type.type.name;
+								<span className='pokemon-card__span'>Abilities:</span>
+								{pokemon.abilities.map((item, index) => {
+									if (index === pokemon.abilities.length - 1) {
+										return (
+											item.ability.name[0].toUpperCase() +
+											item.ability.name.slice(1)
+										);
 									} else {
-										return type.type.name + ', ';
+										return (
+											item.ability.name[0].toUpperCase() +
+											item.ability.name.slice(1) +
+											', '
+										);
+									}
+								})}
+							</p>
+							<p>
+								{' '}
+								<span className='pokemon-card__span'>Type:</span>{' '}
+								{pokemon.types.map((item, index) => {
+									if (index === pokemon.types.length - 1) {
+										return (
+											item.type.name[0].toUpperCase() + item.type.name.slice(1)
+										);
+									} else {
+										return (
+											item.type.name[0].toUpperCase() +
+											item.type.name.slice(1) +
+											', '
+										);
 									}
 								})}
 							</p>
